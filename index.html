@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kush Collective — Good People. Good Pot.</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0904;
+    --dark: #111009;
+    --gold: #c9a96e;
+    --gold-light: #e8cfa0;
+    --gold-dim: #7a6440;
+    --gold-border: rgba(201,169,110,0.2);
+    --cream: #f5efe3;
+    --smoke: #1e1c16;
+    --text: #d4ccbc;
+    --text-dim: #7a7565;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Grain */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: linear-gradient(to bottom, rgba(10,9,4,0.96) 0%, transparent 100%);
+    backdrop-filter: blur(6px);
+    transition: background 0.3s;
+  }
+  .nav-logo img { height: 48px; filter: brightness(1.1); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--black);
+    padding: 0.5rem 1.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,169,110,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 50%),
+      var(--black);
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: flex; align-items: center; gap: 1rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--cream);
+    position: relative;
+    max-width: 900px;
+    animation: fadeUp 1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 420px;
+    line-height: 1.7;
+    position: relative;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; margin-top: 2.5rem;
+    position: relative;
+    animation: fadeUp 1s 0.35s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    padding: 0.85rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--gold-dim);
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; right: 3rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    writing-mode: vertical-rl;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold-dim), transparent);
+  }
+
+  /* ── STATS ── */
+  .stats { background: var(--gold); padding: 3rem; }
+  .stats-inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(10,9,4,0.6);
+    margin-top: 0.3rem;
+  }
+  .stat-divider { width: 1px; height: 50px; background: rgba(10,9,4,0.2); }
+
+  /* ── SHARED SECTION ── */
+  section { padding: 7rem 3rem; }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-tag::before {
+    content: '';
+    display: inline-block;
+    width: 30px; height: 1px;
+    background: var(--gold);
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.15;
+  }
+
+  /* ── WHO WE SERVE ── */
+  .audience { background: var(--dark); }
+  .audience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 4rem;
+    border: 1px solid rgba(201,169,110,0.15);
+  }
+  .audience-card {
+    padding: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .audience-card:first-child { border-right: 1px solid rgba(201,169,110,0.15); }
+  .audience-card:hover { background: rgba(201,169,110,0.03); }
+  .audience-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.4s;
+  }
+  .audience-card:hover::before { height: 100%; }
+  .card-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(201,169,110,0.08);
+    position: absolute;
+    top: 1rem; right: 2rem;
+    line-height: 1;
+  }
+  .card-icon { font-size: 2rem; margin-bottom: 1.5rem; }
+  .audience-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+  .audience-card p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .card-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .card-bullets li {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text);
+    letter-spacing: 0.05em;
+    display: flex; align-items: flex-start; gap: 0.8rem;
+  }
+  .card-bullets li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--black); }
+  .services-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: end;
+    margin-bottom: 4rem;
+  }
+  .services-intro p {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-top: 1.5rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201,169,110,0.12);
+  }
+  .service-item {
+    background: var(--black);
+    padding: 2.5rem;
+    transition: background 0.3s;
+  }
+  .service-item:hover { background: var(--smoke); }
+  .service-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin: 1rem 0 0.7rem;
+  }
+  .service-item p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.7; }
+  .service-icon {
+    font-size: 1.5rem;
+    display: inline-block;
+    padding: 0.6rem;
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+
+  /* ── INQUIRY ── */
+  .inquiry { background: var(--smoke); position: relative; overflow: hidden; }
+  .inquiry::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .inquiry-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .inquiry-left h2 { margin-bottom: 1.5rem; }
+  .inquiry-left p { color: var(--text-dim); line-height: 1.8; margin-bottom: 2rem; font-size: 0.95rem; }
+  .services-offered { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .services-offered li {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text);
+    letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .services-offered li::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .gform-wrapper {
+    border: 1px solid rgba(201,169,110,0.2);
+    overflow: hidden;
+    background: rgba(255,255,255,0.02);
+    position: relative;
+  }
+  .gform-wrapper iframe {
+    position: relative;
+    z-index: 1;
+    display: block;
+    filter: invert(1) hue-rotate(180deg) brightness(0.88) contrast(0.95);
+  }
+
+  /* ══════════════════════════════════════════
+     ── LIVE MENU SECTION ──
+  ══════════════════════════════════════════ */
+  .menu-section {
+    background: var(--dark);
+    padding: 5rem 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .menu-section::before {
+    content: 'LIVE MENU';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 14vw;
+    font-weight: 900;
+    color: rgba(201,169,110,0.03);
+    white-space: nowrap;
+    top: 2rem; left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+
+  .menu-header {
+    text-align: center;
+    padding: 0 3rem 4rem;
+    position: relative;
+  }
+  .menu-header .section-tag { justify-content: center; }
+  .menu-header h2 { margin-bottom: 1rem; }
+  .menu-header p {
+    color: var(--text-dim);
+    max-width: 480px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .menu-updated {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+
+
+
+  /* Menu content area */
+  .menu-content { padding: 0 3rem 7rem; max-width: 1400px; margin: 0 auto; }
+
+  /* ── ACCORDION ── */
+  .accordion { border: 1px solid var(--gold-border); margin-bottom: 2px; }
+
+  .accordion-trigger {
+    width: 100%;
+    background: var(--dark);
+    border: none;
+    cursor: pointer;
+    padding: 1.4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    transition: background 0.2s;
+    text-align: left;
+  }
+  .accordion-trigger:hover { background: var(--smoke); }
+  .accordion-trigger.open { background: var(--smoke); border-bottom: 1px solid var(--gold-border); }
+
+  .accordion-left { display: flex; align-items: center; gap: 1.5rem; }
+
+  .accordion-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cream);
+  }
+  .accordion-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 3px 10px;
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+  .accordion-avail {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .accordion-chevron {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    opacity: 0.5;
+  }
+  .accordion-trigger.open .accordion-chevron { transform: rotate(180deg); opacity: 1; }
+
+  /* Panel */
+  .accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-panel.open { max-height: 4000px; }
+
+  /* Product grid inside panel */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1px;
+    background: rgba(201,169,110,0.08);
+    padding: 1px;
+  }
+
+  /* Product card */
+  .product-card {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+  }
+  .product-card:hover { background: var(--smoke); }
+  .product-card.oos { opacity: 0.38; filter: grayscale(0.4); }
+  .product-card.oos::after {
+    content: 'OUT OF STOCK';
+    position: absolute;
+    top: 12px; right: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.18em;
+    color: #c0392b;
+    border: 1px solid #c0392b;
+    padding: 3px 7px;
+    background: rgba(17,16,9,0.9);
+    z-index: 2;
+  }
+  .product-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.3s;
+    z-index: 1;
+  }
+  .product-card:hover::before { height: 100%; }
+
+  /* Photo */
+  .card-photo {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    background: var(--smoke);
+  }
+  .card-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--smoke);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-photo-placeholder svg { opacity: 0.12; width: 36px; }
+
+  /* Card body */
+  .card-body { padding: 1.3rem 1.5rem 0.8rem; }
+  .card-dom {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 0.9rem;
+  }
+  .card-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .cstat { display: flex; flex-direction: column; gap: 2px; }
+  .cstat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .cstat-value { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--text); }
+  .cstat-value.thc { color: var(--gold-light); }
+
+  /* Pricing */
+  .card-pricing {
+    border-top: 1px solid rgba(201,169,110,0.1);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .price-item { display: flex; flex-direction: column; gap: 2px; }
+  .price-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .price-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--gold);
+  }
+
+  /* Footer row */
+  .card-footer-row {
+    padding: 0.5rem 1.5rem 1rem;
+  }
+  .card-useby {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .card-useby span { color: var(--text); }
+
+  /* Loading */
+  #menu-loading {
+    text-align: center;
+    padding: 5rem 3rem;
+  }
+  .loading-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    animation: blink 1.4s ease infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* Demo banner */
+  .demo-banner {
+    background: rgba(201,169,110,0.08);
+    border-bottom: 1px solid var(--gold-border);
+    padding: 10px 3rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  /* ── EMAIL SIGNUP ── */
+  .signup {
+    background: var(--black);
+    padding: 5rem 3rem;
+    border-top: 1px solid rgba(201,169,110,0.1);
+  }
+  .signup-inner { max-width: 500px; margin: 0 auto; text-align: center; }
+  .signup h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--cream);
+    margin-bottom: 0.7rem;
+  }
+  .signup p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 2rem; }
+  .signup-form { display: flex; gap: 0; border: 1px solid rgba(201,169,110,0.25); }
+  .signup-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.9rem 1.2rem;
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+  }
+  .signup-form input::placeholder { color: var(--text-dim); }
+  .signup-form button {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 0.9rem 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .signup-form button:hover { background: var(--gold-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+  footer a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section, .menu-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; }
+    .audience-grid { grid-template-columns: 1fr; }
+    .audience-card:first-child { border-right: none; border-bottom: 1px solid rgba(201,169,110,0.15); }
+    .services-intro { grid-template-columns: 1fr; gap: 2rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .inquiry-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .menu-content { padding: 0 1.5rem 5rem; }
+    .menu-nav { padding: 0 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 3rem; }
+    .product-grid { grid-template-columns: 1fr; }
+    .stats-inner { gap: 2rem; }
+    .stat-divider { display: none; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://img1.wsimg.com/isteam/ip/f2cc24f0-ad22-4229-8bd5-9a4a85d4c942/blob-913992f.png/:/rs=h:130,cg:true,m/qt=q:95" alt="Kush Collective">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#who-we-serve">Who We Serve</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#marketing">Marketing</a></li>
+    <li><a href="#menu">Live Menu</a></li>
+  </ul>
+  <a href="#menu" class="nav-cta">View Today's Menu</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">Colorado Cannabis Brokerage</div>
+  <h1>Good People.<br><em>Good Pot.</em></h1>
+  <p class="hero-sub">KC connects producers with retail buyers — reducing overhead, expanding reach, and moving quality product through a network built on trust.</p>
+  <div class="hero-actions">
+    <a href="#who-we-serve" class="btn-primary">Work With Us</a>
+    <a href="#menu" class="btn-ghost">View Live Menu</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-number">400+</div>
+      <div class="stat-label">Retail Accounts</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-number">$618K</div>
+      <div class="stat-label">2025 Wholesale Volume</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-number">15+</div>
+      <div class="stat-label">Years Industry Experience</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-number">Daily</div>
+      <div class="stat-label">Menu Distribution</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO WE SERVE -->
+<section class="audience fade-in" id="who-we-serve">
+  <div class="section-tag">Who We Serve</div>
+  <h2>A two-sided network built<br>for the Colorado market.</h2>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="card-number">01</div>
+      <div class="card-icon">🏪</div>
+      <h3>Retail Stores</h3>
+      <p>We make your buying process frictionless — curated daily menus, responsive reps, and inventory that actually protects your shelf margin.</p>
+      <ul class="card-bullets">
+        <li>Daily menu email with clear order CTAs</li>
+        <li>Curated, quality-vetted vendors only</li>
+        <li>Simplified ordering via text, email, or call</li>
+        <li>Consistent follow-up from real people</li>
+        <li>COD, Net 15, and Net 30 terms available</li>
+      </ul>
+    </div>
+    <div class="audience-card">
+      <div class="card-number">02</div>
+      <div class="card-icon">🌿</div>
+      <h3>Producers & Vendors</h3>
+      <p>Your outsourced sales engine. We bring your product to 400+ buyers through daily menu exposure, order relay, invoice coordination, and optional creative support.</p>
+      <ul class="card-bullets">
+        <li>Commission-only model (standard 10%)</li>
+        <li>Immediate access to KC's retail buyer network</li>
+        <li>Order capture, relay & invoice coordination</li>
+        <li>Performance reporting every billing cycle</li>
+        <li>Optional branding & marketing services</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services fade-in" id="services">
+  <div class="services-intro">
+    <div>
+      <div class="section-tag">What We Do</div>
+      <h2>Sales engine.<br>Creative studio.<br>Operations backbone.</h2>
+    </div>
+    <p>KC runs a relationship-driven brokerage with consistent daily outreach, clean inventory visibility, and the operational follow-through that most brokers don't offer. We also bundle creative services to improve sell-through and strengthen your position on the shelf.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-item">
+      <div class="service-icon">📋</div>
+      <h4>Daily Menu Distribution</h4>
+      <p>Fresh menu drops to 400+ retail accounts every day — with rotating themes like Fresh Drops, Margin Movers, and Genetic Spotlights.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">🤝</div>
+      <h4>Order-to-Cash Workflow</h4>
+      <p>Order intake, relay to fulfillment, invoice coordination, and vendor billing on a fixed cadence. We handle the back-and-forth so you don't have to.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">📊</div>
+      <h4>Account Management</h4>
+      <p>Weekly touch cadence for top accounts, payment tier management, and detailed performance reporting — all built to scale.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">🎨</div>
+      <h4>Branding & Packaging</h4>
+      <p>Full brand system development, packaging design, and launch kits that give your product the shelf presence it deserves.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">🖼️</div>
+      <h4>Retail Marketing Assets</h4>
+      <p>Sell sheets, wall decals, display builds, and menu assets designed to convert. Everything a store needs to move your product.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">🚀</div>
+      <h4>Vendor Launch Kits</h4>
+      <p>Everything to hit the ground running: strain/genetic notes, pricing tiers, photos, MOQ setup, and your first menu feature.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETING INQUIRY -->
+<section class="inquiry fade-in" id="marketing">
+  <div class="inquiry-inner">
+    <div class="inquiry-left">
+      <div class="section-tag">Creative & Marketing</div>
+      <h2>Let's build your brand on the shelf.</h2>
+      <p>Whether you need a full brand system or just better retail assets, KC's creative arm can help. We specialize in cannabis-specific creative that's actually designed to convert — not just look pretty.</p>
+      <ul class="services-offered">
+        <li>Brand identity & logo systems</li>
+        <li>Packaging design & pre-roll tubes</li>
+        <li>Retail display builds & wall decals</li>
+        <li>Sell sheets & flyers</li>
+        <li>Menu & digital assets</li>
+        <li>Full vendor launch kits</li>
+        <li>Ongoing retainer support</li>
+      </ul>
+    </div>
+    <div class="gform-wrapper">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfGXi7xPuwBGgPkTl5Yi53Yw_jQ84RJ31ypzJlNA5Bx15229g/viewform?embedded=true"
+        width="100%"
+        height="900"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Kush Collective Marketing Inquiry">
+        Loading…
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LIVE MENU ══ -->
+<div class="demo-banner" id="demo-banner">⚠ Demo Mode — Connect your Google Sheet to show live inventory</div>
+
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div class="section-tag" style="justify-content:center">Live Menu</div>
+    <h2>Today's Offerings</h2>
+    <p>Updated daily with fresh inventory from vetted Colorado producers. Browse current availability and contact your rep to place an order.</p>
+    <p class="menu-updated" id="menu-updated"></p>
+  </div>
+
+  <div class="menu-content">
+    <div id="menu-loading"><p class="loading-text">Loading inventory...</p></div>
+    <div id="menu-body"></div>
+  </div>
+</section>
+
+<!-- EMAIL SIGNUP -->
+<section class="signup">
+  <div class="signup-inner">
+    <div class="section-tag" style="justify-content:center">Stay in the Loop</div>
+    <h3>Get the daily menu in your inbox.</h3>
+    <p>Join 400+ accounts receiving fresh drops, margin movers, and genetic spotlights every morning.</p>
+    <div class="signup-form">
+      <input type="email" placeholder="your@email.com">
+      <button type="button">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Kush Collective — All Rights Reserved. Colorado Cannabis Brokerage.</p>
+  <p>Good People. Good Pot. &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection#d2bab7bebebd92b9a7a1bab1bdbebeb7b1a6bba4b7fcb1bd"><span class="__cf_email__" data-cfemail="e78f828b8b88a78c92948f84888b8b8284938e9182c98488">[email&#160;protected]</span></a></p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─────────────────────────────────────
+// CONFIG — swap these when going live
+// ─────────────────────────────────────
+const CONFIG = {
+  PUBLISHED_CSV_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAp9pmR0Xf-UpCnHMMbQnYRI5IA0gvc_Z3q1WMOWoruweHrW36GsOZjPz1xDp-7g/pub?gid=1348562307&single=true&output=csv',
+  DEMO_MODE: false,
+};
+
+const COL = {
+  SKU:0, CATEGORY:1, STRAIN:2, DOMINANCE:3, THC:4,
+  QTY:5, PRICE_1:6, PRICE_2:7, HARVEST:8, USE_BY:9,
+  PHOTO:10, POTENCY:11, START_INV:12, ORDERS:13, STATUS:14, VENDOR:15
+};
+
+const CATEGORY_ORDER = [
+  'Indoor Flower','Sun Grown Flower','Wax Infused Pre-Rolls',
+  '1G Live Resin','1G Diamonds','1G Disposables','1G Carts','2G Carts'
+];
+
+const UNIT_TYPES = {
+  'Indoor Flower':         ['per lb','per ½ lb'],
+  'Sun Grown Flower':      ['per lb','per ½ lb'],
+  'Wax Infused Pre-Rolls': ['per unit','per case'],
+  '1G Live Resin':         ['per unit','per case'],
+  '1G Diamonds':           ['per unit','per case'],
+  '1G Disposables':        ['per unit','per case'],
+  '1G Carts':              ['per unit','per case'],
+  '2G Carts':              ['per unit','per case'],
+};
+
+const DEMO_DATA = [
+  ['KC-001','Indoor Flower','Wedding Cake','Indica Dominant','28.4%','12.5','$3,200','$1,700','','2025-04-01','','','20','2','Available','Vendor A'],
+  ['KC-002','Indoor Flower','Runtz','Hybrid','26.1%','8.0','$3,400','$1,800','','2025-04-15','','','15','4','Available','Vendor B'],
+  ['KC-003','Indoor Flower','Gelato 41','Indica Dominant','29.8%','0','$3,600','$1,900','','2025-03-20','','','10','10','Out of Stock','Vendor A'],
+  ['KC-004','Sun Grown Flower','Durban Poison','Sativa Dominant','22.3%','25.0','$2,400','$1,300','','2025-04-05','','','30','3','Available','Vendor C'],
+  ['KC-005','Sun Grown Flower','Blue Dream','Hybrid','21.0%','18.5','$2,200','$1,200','','2025-04-10','','','25','5','Available','Vendor C'],
+  ['KC-006','Wax Infused Pre-Rolls','Inferno OG Infused','Indica','31.2%','200','$12','','','2025-02-20','','','300','80','Available','Vendor B'],
+  ['KC-007','1G Live Resin','Strawberry Cough','Sativa','78.5%','48','$45','$420','','2025-01-15','','','60','12','Available','Vendor A'],
+  ['KC-008','1G Diamonds','GG4 Diamonds','Hybrid','92.1%','24','$55','$500','','2025-02-01','','','30','6','Available','Vendor D'],
+  ['KC-009','1G Disposables','Zkittlez','Hybrid','85.0%','72','$35','$320','','2025-03-01','','','100','20','Available','Vendor D'],
+  ['KC-010','1G Carts','Sour Diesel','Sativa Dominant','84.3%','60','$30','$275','','2025-03-15','','','80','20','Available','Vendor B'],
+  ['KC-011','2G Carts','Purple Punch','Indica Dominant','82.7%','36','$50','$460','','2025-03-15','','','50','14','Available','Vendor B'],
+];
+
+// ── Helpers ──
+function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-'); }
+
+function driveThumb(url){
+  if(!url) return null;
+  const m = url.match(/\/d\/(.*?)\/|id=(.*?)(&|$)/);
+  if(m){ const id=m[1]||m[2]; return `https://drive.google.com/thumbnail?id=${id}&sz=w600`; }
+  return url;
+}
+
+function fmtDate(s){
+  if(!s) return null;
+  try { return new Date(s).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+  catch{ return s; }
+}
+
+function fmtPrice(v){
+  if(!v) return null;
+  const n = parseFloat(String(v).replace(/[^0-9.]/g,''));
+  if(isNaN(n)) return null;
+  return '$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+}
+
+function placeholderSVG(){
+  return `<div class="card-photo-placeholder"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="16" stroke="%23c9a96e" stroke-width="1"/><path d="M20 12v8l5 3" stroke="%23c9a96e" stroke-width="1.5" stroke-linecap="round"/></svg></div>`;
+}
+
+// ── Build card ──
+function buildCard(row, units){
+  const oos = (row[COL.STATUS]||'').toLowerCase()==='out of stock' || parseFloat(row[COL.QTY]||0)<=0;
+  const photo = driveThumb(row[COL.PHOTO]);
+  const p1 = fmtPrice(row[COL.PRICE_1]);
+  const p2 = fmtPrice(row[COL.PRICE_2]);
+  const useBy = fmtDate(row[COL.USE_BY]);
+  const qty = parseFloat(row[COL.QTY]||0);
+  const photoHTML = photo
+    ? `<img class="card-photo" src="${photo}" alt="${row[COL.STRAIN]||''}" loading="lazy" onerror="this.outerHTML='<div class=card-photo-placeholder></div>'">`
+    : `<div class="card-photo-placeholder"></div>`;
+  return `<div class="product-card${oos?' oos':''}">
+    ${photoHTML}
+    <div class="card-body">
+      ${row[COL.DOMINANCE]?`<div class="card-dom">${row[COL.DOMINANCE]}</div>`:''}
+      <div class="card-name">${row[COL.STRAIN]||'—'}</div>
+      <div class="card-stats">
+        ${row[COL.THC]?`<div class="cstat"><span class="cstat-label">THC</span><span class="cstat-value thc">${row[COL.THC]}</span></div>`:''}
+        ${qty>0?`<div class="cstat"><span class="cstat-label">Available</span><span class="cstat-value">${qty} lbs</span></div>`:''}
+      </div>
+    </div>
+    ${(p1||p2)?`<div class="card-pricing">
+      ${p1?`<div class="price-item"><span class="price-label">${units[0]}</span><span class="price-value">${p1}</span></div>`:''}
+      ${p2?`<div class="price-item"><span class="price-label">${units[1]}</span><span class="price-value">${p2}</span></div>`:''}
+    </div>`:''}
+    ${useBy?`<div class="card-footer-row"><span class="card-useby">Use by <span>${useBy}</span></span></div>`:''}
+  </div>`;
+}
+
+// ── Build accordion menu ──
+function buildMenu(rows){
+  const grouped = {};
+  rows.forEach(r => {
+    const cat = (r[COL.CATEGORY]||'').trim();
+    if(!cat) return;
+    if(!grouped[cat]) grouped[cat]=[];
+    grouped[cat].push(r);
+  });
+  const cats = [
+    ...CATEGORY_ORDER.filter(c=>grouped[c]),
+    ...Object.keys(grouped).filter(c=>!CATEGORY_ORDER.includes(c))
+  ];
+  document.getElementById('menu-body').innerHTML = cats.map((cat, i) => {
+    const products = grouped[cat];
+    const avail = products.filter(p=>(p[COL.STATUS]||'').toLowerCase()!=='out of stock' && parseFloat(p[COL.QTY]||0)>0);
+    const oos   = products.filter(p=>(p[COL.STATUS]||'').toLowerCase()==='out of stock' || parseFloat(p[COL.QTY]||0)<=0);
+    const units = UNIT_TYPES[cat]||['Unit 1','Unit 2'];
+    const id = `acc-${i}`;
+    return `
+    <div class="accordion">
+      <button class="accordion-trigger" data-target="${id}" aria-expanded="false">
+        <div class="accordion-left">
+          <span class="accordion-title">${cat}</span>
+          <span class="accordion-count">${products.length} SKUs</span>
+          ${avail.length>0?`<span class="accordion-avail">${avail.length} available</span>`:''}
+        </div>
+        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="accordion-panel" id="${id}">
+        <div class="product-grid">
+          ${[...avail,...oos].map(r=>buildCard(r,units)).join('')}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.querySelectorAll('.accordion-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.dataset.target);
+      const isOpen = btn.classList.contains('open');
+      btn.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      panel.classList.toggle('open', !isOpen);
+    });
+  });
+
+  document.getElementById('menu-updated').textContent =
+    'Updated '+new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+}
+
+// ── Fetch sheet ──
+async function fetchSheet(){
+  const url=CONFIG.PUBLISHED_CSV_URL;
+  const res=await fetch(url);
+  if(!res.ok) throw new Error('Failed');
+  const text=await res.text();
+  return text.trim().split('\n').slice(1).map(line=>{
+    const cols=[]; let cur='',inQ=false;
+    for(let i=0;i<line.length;i++){
+      if(line[i]==='"'){inQ=!inQ;}
+      else if(line[i]===','&&!inQ){cols.push(cur.trim());cur='';}
+      else cur+=line[i];
+    }
+    cols.push(cur.trim());
+    return cols;
+  });
+}
+
+// ── Init ──
+async function init(){
+  try{
+    const data = CONFIG.DEMO_MODE ? DEMO_DATA : await fetchSheet();
+    document.getElementById('demo-banner').style.display='none';
+    document.getElementById('menu-loading').style.display='none';
+    buildMenu(data);
+  } catch(e){
+    document.getElementById('menu-loading').innerHTML=
+      '<p class="loading-text">Unable to load menu — please check back shortly.</p>';
+  }
+}
+
+// ── Scroll fade-in ──
+const fadeObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>fadeObserver.observe(el));
+
+init();
+</script>
+</body>
+</html>
