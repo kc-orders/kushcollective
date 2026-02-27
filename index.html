@@ -552,13 +552,26 @@
 
   /* Card body */
   .card-body { padding: 1.3rem 1.5rem 0.8rem; }
+  .card-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.5rem; }
   .card-dom {
     font-family: 'DM Mono', monospace;
     font-size: 0.55rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 2px 8px;
+    display: inline-block;
+  }
+  .card-lineage {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 0.4rem;
+    border: 1px solid var(--gold-border);
+    padding: 2px 8px;
+    display: inline-block;
   }
   .card-name {
     font-family: 'Playfair Display', serif;
@@ -950,9 +963,9 @@ const CONFIG = {
 };
 
 const COL = {
-  SKU:0, CATEGORY:1, STRAIN:2, DOMINANCE:3, THC:4,
-  QTY:5, PRICE_1:6, PRICE_2:7, HARVEST:8, USE_BY:9,
-  PHOTO:10, POTENCY:11, START_INV:12, ORDERS:13, STATUS:14, VENDOR:15
+  VENDOR:0, CATEGORY:1, STRAIN:2, LINEAGE:3, DOMINANCE:4, THC:5,
+  START_INV:6, HARVEST:7, USE_BY:8, PHOTO:9, POTENCY:10,
+  SKU:11, PRICE_1:12, PRICE_2:13, ORDERS:14, QTY:15, STATUS:16
 };
 
 const CATEGORY_ORDER = [
@@ -1026,7 +1039,10 @@ function buildCard(row, units){
   return `<div class="product-card${oos?' oos':''}">
     ${photoHTML}
     <div class="card-body">
-      ${row[COL.DOMINANCE]?`<div class="card-dom">${row[COL.DOMINANCE]}</div>`:''}
+      <div class="card-badges">
+        ${row[COL.DOMINANCE]?`<span class="card-dom">${row[COL.DOMINANCE]}</span>`:''}
+        ${row[COL.LINEAGE]?`<span class="card-lineage">${row[COL.LINEAGE]}</span>`:''}
+      </div>
       <div class="card-name">${row[COL.STRAIN]||'—'}</div>
       <div class="card-stats">
         ${row[COL.THC]?`<div class="cstat"><span class="cstat-label">THC</span><span class="cstat-value thc">${row[COL.THC]}</span></div>`:''}
